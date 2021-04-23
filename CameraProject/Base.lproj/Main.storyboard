@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -16,47 +17,64 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wky-Ej-ubz">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="513"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="jqZ-7x-yjF" appends="YES" id="3hO-Ao-OAF"/>
-                                    <outletCollection property="gestureRecognizers" destination="YQ9-Dq-vbC" appends="YES" id="Gha-ia-849"/>
-                                </connections>
-                            </view>
-                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YRt-Mo-dWS">
-                                <rect key="frame" x="0.0" y="574" width="414" height="162"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            </pickerView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vzO-n2-qf4">
-                                <rect key="frame" x="19" y="545" width="48" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Library"/>
-                                <connections>
-                                    <action selector="accessLibrary:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iUG-lg-lOd"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sPZ-Wh-33V">
-                                <rect key="frame" x="163" y="545" width="88" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Take a photo"/>
-                                <connections>
-                                    <action selector="didTakePhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qMI-fq-0Mq"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3wM-5U-vLO">
-                                <rect key="frame" x="349" y="544" width="45" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Rotate"/>
-                                <connections>
-                                    <action selector="rotateCam:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EmX-hY-COQ"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="sic-ff-gCj">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wky-Ej-ubz">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="430"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="jqZ-7x-yjF" appends="YES" id="3hO-Ao-OAF"/>
+                                            <outletCollection property="gestureRecognizers" destination="YQ9-Dq-vbC" appends="YES" id="Gha-ia-849"/>
+                                        </connections>
+                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="C1C-QE-yQy">
+                                        <rect key="frame" x="0.0" y="460" width="414" height="30"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vzO-n2-qf4">
+                                                <rect key="frame" x="0.0" y="0.0" width="109.66666666666667" height="30"/>
+                                                <state key="normal" title="Library"/>
+                                                <connections>
+                                                    <action selector="accessLibrary:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iUG-lg-lOd"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sPZ-Wh-33V">
+                                                <rect key="frame" x="109.66666666666667" y="0.0" width="201.33333333333331" height="30"/>
+                                                <state key="normal" title="Take a photo"/>
+                                                <connections>
+                                                    <action selector="didTakePhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qMI-fq-0Mq"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3wM-5U-vLO">
+                                                <rect key="frame" x="311" y="0.0" width="103" height="30"/>
+                                                <state key="normal" title="Rotate"/>
+                                                <connections>
+                                                    <action selector="rotateCam:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EmX-hY-COQ"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YRt-Mo-dWS">
+                                        <rect key="frame" x="0.0" y="520" width="414" height="216"/>
+                                    </pickerView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="C1C-QE-yQy" firstAttribute="top" secondItem="Wky-Ej-ubz" secondAttribute="bottom" constant="30" id="FIN-x4-Ydd"/>
+                                    <constraint firstItem="YRt-Mo-dWS" firstAttribute="top" secondItem="C1C-QE-yQy" secondAttribute="bottom" constant="30" id="JKH-rB-SlB"/>
+                                    <constraint firstItem="YRt-Mo-dWS" firstAttribute="top" secondItem="C1C-QE-yQy" secondAttribute="bottom" constant="30" id="Sgf-mV-oDy"/>
+                                    <constraint firstItem="C1C-QE-yQy" firstAttribute="top" secondItem="Wky-Ej-ubz" secondAttribute="bottom" constant="30" id="ncM-la-xPW"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="sic-ff-gCj" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="EvR-7V-oFh"/>
+                            <constraint firstItem="sic-ff-gCj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="XLR-Vh-5kb"/>
+                            <constraint firstItem="sic-ff-gCj" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="lzb-ih-yBA"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="sic-ff-gCj" secondAttribute="bottom" id="qb0-d9-qjd"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="currencyQuality" destination="YRt-Mo-dWS" id="Vmw-Dl-xuM"/>
@@ -76,7 +94,7 @@
                     </connections>
                 </pinchGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-197.10144927536234" y="99.456521739130437"/>
+            <point key="canvasLocation" x="-197.10144927536234" y="99.107142857142847"/>
         </scene>
     </scenes>
     <resources>
