@@ -9,7 +9,7 @@ import UIKit
 import AVFoundation
 import PhotosUI
 
-class ViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate{
+class ViewController: UIViewController, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate{
     
     @IBOutlet weak var currencyQuality: UIPickerView!
     
@@ -19,6 +19,10 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIGesture
     var captureSession: AVCaptureSession!
     var stillImageOutput: AVCapturePhotoOutput!
     var videoPreviewLayer: AVCaptureVideoPreviewLayer!
+    var image: UIImage!
+    
+    var usingFrontCamera = false
+    let arrayQuality = ["Low", "Medium", "High", "cif352x288", "hd1280x720", "hd1920x1080", "hd4K3840x2160", "iFrame1280x720", "iFrame960x540", "vga640x480"]
 
     var deviceInput = AVCaptureDevice.default(.builtInWideAngleCamera, for: AVMediaType.video, position: .back)
 
@@ -73,11 +77,6 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIGesture
         DispatchQueue.main.async {
             do {
                 try self.deviceInput?.lockForConfiguration()
-
-                /*
-                 Setting (focus/exposure)PointOfInterest alone does not initiate a (focus/exposure) operation.
-                 Call set(Focus/Exposure)Mode() to apply the new point of interest.
-                 */
                 if self.deviceInput!.isFocusPointOfInterestSupported && ((self.deviceInput?.isFocusModeSupported(focusMode)) != nil) {
                     self.deviceInput?.focusPointOfInterest = devicePoint
                     self.deviceInput?.focusMode = focusMode
@@ -101,11 +100,12 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIGesture
 
     @IBAction func didTakePhoto(_ sender: Any) {
         let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])
+
         stillImageOutput.capturePhoto(with: settings, delegate: self)
     }
     
     
-    var usingFrontCamera = false
+
     
     @IBAction func rotateCam(_ sender: Any) {
         
@@ -171,10 +171,6 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIGesture
     }
     
     
-    
-    //lua chon quality
-    let arrayQuality = ["Low", "Medium", "High", "cif352x288", "hd1280x720", "hd1920x1080", "hd4K3840x2160", "iFrame1280x720", "iFrame960x540", "vga640x480"]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         currencyQuality.dataSource = self
@@ -226,6 +222,18 @@ extension ViewController: UIPickerViewDelegate{
             captureSession.sessionPreset = .vga640x480
         default:
             captureSession.sessionPreset = .high
+        }
+    }
+}
+
+extension ViewController: AVCapturePhotoCaptureDelegate{
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        if let imageData = photo.fileDataRepresentation(){
+            image = UIImage(data: imageData)
+            // save capture
+            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+            dismiss(animated: true, completion: nil)
+            print("Save successful")
         }
     }
 }
